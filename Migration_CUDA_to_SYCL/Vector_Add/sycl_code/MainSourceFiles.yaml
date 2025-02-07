@@ -1,0 +1,232 @@
+---
+MainSourceFile:  '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/MainSrcFiles_placehold'
+Replacements:
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          0
+    Length:          18
+    ReplacementText: "#include <sycl/sycl.hpp>\n#include <dpct/dpct.hpp>\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          114
+    Length:          11
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          174
+    Length:          0
+    ReplacementText: ",\n                     const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          188
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          205
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          222
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          251
+    Length:          0
+    ReplacementText: "\n        dpct::device_ext &dev_ct1 = dpct::get_current_device();\n        sycl::queue &q_ct1 = dev_ct1.in_order_queue();"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          290
+    Length:          14
+    ReplacementText: 'dpct::device_info'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          318
+    Length:          32
+    ReplacementText: 'dpct::get_device(0).get_device_info(dev)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          915
+    Length:          59
+    ReplacementText: 'q_ct1.memcpy(d_A, A, N*sizeof(float))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          984
+    Length:          59
+    ReplacementText: 'q_ct1.memcpy(d_B, B, N*sizeof(float))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          1109
+    Length:          40
+    ReplacementText: "q_ct1.parallel_for(\n          sycl::nd_range<3>(sycl::range<3>(1, 1, N), sycl::range<3>(1, 1, N)), \n          [=](sycl::nd_item<3> item_ct1) {\n            VectorAddKernel(d_A, d_B, d_C, item_ct1);\n          });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          1149
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          1219
+    Length:          59
+    ReplacementText: 'q_ct1.memcpy(C, d_C, N*sizeof(float)).wait()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          1449
+    Length:          13
+    ReplacementText: 'dpct::dpct_free(d_A, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          1472
+    Length:          13
+    ReplacementText: 'dpct::dpct_free(d_B, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Offset:          1495
+    Length:          13
+    ReplacementText: 'dpct::dpct_free(d_C, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+MainSourceFilesDigest:
+  - MainSourceFile:  '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add/vector_add.cu'
+    Digest:          3bbe8a5e19d2ed6bce8529cf98bb0299
+    HasCUDASyntax:   true
+DpctVersion:     20.0.0
+MainHelperFileName: ''
+USMLevel:        ''
+FeatureMap:      {}
+CompileTargets:  {}
+OptionMap:
+  AnalysisScopePath:
+    Value:           ''
+    ValueVec:
+      - '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/Vector_Add'
+    Specified:       false
+  AsyncHandler:
+    Value:           'false'
+    Specified:       false
+  BuildScript:
+    Value:           '0'
+    Specified:       false
+  CodePinEnabled:
+    Value:           'false'
+    Specified:       false
+  CommentsEnabled:
+    Value:           'false'
+    Specified:       false
+  CompilationsDir:
+    Value:           ''
+    Specified:       false
+  CtadEnabled:
+    Value:           'false'
+    Specified:       false
+  EnablepProfiling:
+    Value:           'false'
+    Specified:       false
+  ExperimentalFlag:
+    Value:           '0'
+    Specified:       false
+  ExplicitNamespace:
+    Value:           '20'
+    Specified:       false
+  ExtensionDDFlag:
+    Value:           '0'
+    Specified:       false
+  ExtensionDEFlag:
+    Value:           '4294967295'
+    Specified:       false
+  HelperFuncPreferenceFlag:
+    Value:           '0'
+    Specified:       false
+  NDRangeDim:
+    Value:           '3'
+    Specified:       false
+  NoDRYPattern:
+    Value:           'false'
+    Specified:       false
+  OptimizeMigration:
+    Value:           'false'
+    Specified:       false
+  ProcessAll:
+    Value:           'false'
+    Specified:       false
+  RuleFile:
+    Value:           ''
+    Specified:       false
+  SyclNamedLambda:
+    Value:           'false'
+    Specified:       false
+  UseSYCLCompat:
+    Value:           'false'
+    Specified:       false
+  UsmLevel:
+    Value:           '1'
+    Specified:       false
+...
