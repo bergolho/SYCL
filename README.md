@@ -48,7 +48,12 @@ $ sycl-ls
 [cuda:gpu][cuda:0] NVIDIA CUDA BACKEND, NVIDIA GeForce GTX 1060 6GB 6.1 [CUDA 12.7]
 ```
 
+## Run examples
 
- 
+- Start the enviroment by running
+
+```sh
+$ . /opt/intel/oneapi/setvars.sh --include-intel-llvm
+```
 
 

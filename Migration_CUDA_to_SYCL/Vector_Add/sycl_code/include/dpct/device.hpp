@@ -11,9 +11,7 @@
 
 #include <algorithm>
 #include <array>
-#include <climits>
 #include <cstring>
-#include <functional>
 #include <iostream>
 #include <map>
 #include <mutex>
@@ -84,8 +82,6 @@ typedef sycl::event *event_ptr;
 typedef sycl::queue *queue_ptr;
 
 typedef char *device_ptr;
-
-using queue_callback = std::function<void (queue_ptr, int, void*)>;
 
 /// Destroy \p event pointed memory.
 ///
@@ -516,12 +512,6 @@ public:
     return get_device_info().get_global_mem_size();
   }
 
-  size_t get_local_mem_size() const {
-    return get_device_info().get_local_mem_size();
-  }
-
-  int get_max_pitch() const { return INT_MAX; }
-
   /// Get the number of bytes of free and total memory on the SYCL device.
   /// \param [out] free_memory The number of bytes of free memory on the SYCL device.
   /// \param [out] total_memory The number of bytes of total memory on the SYCL device.
@@ -583,21 +573,6 @@ public:
     }
     // Guard the destruct of current_queues to make sure the ref count is safe.
     lock.lock();
-  }
-
-  std::vector<sycl::event> get_in_order_queues_last_events() {
-    std::unique_lock<mutex_type> lock(m_mutex);
-    std::vector<sycl::event> last_events;
-    std::vector<std::shared_ptr<sycl::queue>> current_queues(_queues);
-    lock.unlock();
-    for (const auto &q : current_queues) {
-      if (q->is_in_order()) {
-        last_events.push_back(q->ext_oneapi_get_last_event());
-      }
-    }
-    // Guard the destruct of current_queues to make sure the ref count is safe.
-    lock.lock();
-    return last_events;
   }
 
   sycl::queue *create_queue(bool enable_exception_handler = false) {

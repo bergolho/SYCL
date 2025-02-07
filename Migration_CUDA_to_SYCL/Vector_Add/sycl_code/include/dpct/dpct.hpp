@@ -6,37 +6,6 @@
 //
 //===----------------------------------------------------------------------===//
 
-// clang-format off
-/*
-There are 3 macros that can be used to control the behavior of the helper
-function files.
-+========================+=========================+===========================+
-|                        | Helper function files   | Helper function files     |
-| Macro Name             | Used in dpct migrated   | Used in direct            |
-|                        | code                    | programming               |
-+========================+=========================+===========================+
-| DPCT_USM_LEVEL_NONE    | USM by default.         | USM by default.           |
-| (Use USM or SYCL       | Use SYCL Buffer by      | Define it explicitly to   |
-| buffer)                | running dpct with       | use the SYCL buffer.      |
-|                        | "--use-level=none".     |                           |
-+------------------------+-------------------------+---------------------------+
-| DPCT_PROFILING_ENABLED | Enabled heuristically   | Disable by default.       |
-| (Enable SYCL queue     | depends on the input    | Define it explicitly to   |
-| profiling)             | code.                   | enable.                   |
-|                        | Enable explicitly by    |                           |
-|                        | running dpct with       |                           |
-|                        | "--enable-profiling".   |                           |
-|                        | Disable by removing the |                           |
-|                        | macro definition        |                           |
-|                        | manually.               |                           |
-+------------------------+-------------------------+---------------------------+
-| DPCT_HELPER_VERBOSE    | Disable by default.     | Disable by default.       |
-| (Verbose option)       | Define it explicitly to | Define it explicitly to   |
-|                        | enable.                 | enable.                   |
-+========================+=========================+===========================+
-*/
-// clang-format on
-
 #ifndef __DPCT_HPP__
 #define __DPCT_HPP__
 
@@ -77,17 +46,9 @@ template <int Arg> class dpct_kernel_scalar;
 
 #define DPCT_COMPATIBILITY_TEMP (900)
 
-namespace dpct {
+namespace dpct{
 enum error_code { success = 0, default_error = 999 };
-/// A dummy function introduced to assist auto migration.
-/// The migration tool user should replace it with a real error-handling function.
-/// SYCL reports errors using exceptions and does not use error codes.
-inline const char *get_error_string_dummy(int ec) {
-  (void)ec;
-  return "<FIXME: Placeholder>"; // Return the error string for the error code
-                                 // ec.
 }
-} // namespace dpct
 
 #define DPCT_CHECK_ERROR(expr)                                                 \
   [&]() {                                                                      \

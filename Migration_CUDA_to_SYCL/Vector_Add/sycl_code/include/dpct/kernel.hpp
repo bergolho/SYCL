@@ -26,8 +26,8 @@
 #error "SYCLomatic runtime requires C++ filesystem support"
 #endif
 
-#include "image.hpp"
 #include <fstream>
+#include <image.hpp>
 #include <random>
 
 namespace dpct {
@@ -318,10 +318,8 @@ class kernel_library {
 public:
   constexpr kernel_library() : ptr{nullptr} {}
   constexpr kernel_library(void *ptr) : ptr{ptr} {}
-  kernel_library(uint64_t addr) : ptr(reinterpret_cast<void *>(addr)) {}
 
   operator void *() const { return ptr; }
-  explicit operator uint64_t() const { return reinterpret_cast<uint64_t>(ptr); }
 
 private:
   void *ptr;
@@ -395,17 +393,15 @@ class kernel_function {
 public:
   constexpr kernel_function() : ptr{nullptr} {}
   constexpr kernel_function(dpct::kernel_functor ptr) : ptr{ptr} {}
-  kernel_function(uint64_t addr)
-      : ptr(reinterpret_cast<dpct::kernel_functor>(addr)) {}
 
   operator void *() const { return ((void *)ptr); }
 
   void operator()(sycl::queue &q, const sycl::nd_range<3> &range,
-                  unsigned int a, void **args, void **extra) const {
+                  unsigned int a, void **args, void **extra) {
     ptr(q, range, a, args, extra);
   }
 
-  explicit operator uint64_t() const { return reinterpret_cast<uint64_t>(ptr); }
+  explicit operator uint64_t() const { return (uint64_t)this; }
 
 private:
   dpct::kernel_functor ptr;
@@ -415,7 +411,7 @@ private:
 /// \param [in] library Handle to the kernel library.
 /// \param [in] name Name of the kernel function.
 static inline dpct::kernel_function
-get_kernel_function(const kernel_library &library, const std::string &name) {
+get_kernel_function(kernel_library &library, const std::string &name) {
 #ifdef _WIN32
   dpct::kernel_functor fn = reinterpret_cast<dpct::kernel_functor>(
       GetProcAddress(static_cast<HMODULE>(static_cast<void *>(library)),
@@ -438,7 +434,7 @@ get_kernel_function(const kernel_library &library, const std::string &name) {
 ///             function.
 /// \param [in] kernelParams Array of pointers to kernel arguments.
 /// \param [in] extra Extra arguments.
-static inline void invoke_kernel_function(const dpct::kernel_function &function,
+static inline void invoke_kernel_function(dpct::kernel_function &function,
                                           sycl::queue &queue,
                                           sycl::range<3> groupRange,
                                           sycl::range<3> localRange,
@@ -447,158 +443,6 @@ static inline void invoke_kernel_function(const dpct::kernel_function &function,
   function(queue, sycl::nd_range<3>(groupRange * localRange, localRange),
            localMemSize, kernelParams, extra);
 }
-
-/// Utility class for launching SYCL kernels through kernel
-/// function wrapper.
-/// For example:
-/// A SYCL kernel function:
-///   void kernel_func(int *ptr, sycl::nd_item<3> item);
-/// Kernel function wrapper:
-///   void kernel_func_wrapper(int *ptr) {
-///     sycl::queue queue = *dpct::kernel_launcher::_que;
-///     unsigned int localMemSize = dpct::kernel_launcher::_local_mem_size;
-///     sycl::nd_range<3> nr = dpct::kernel_launcher::_nr;
-///     queue.parallel_for(
-///       nr,
-///       [=](sycl::nd_item<3> item_ct1) {
-///         kernel_func(ptr, item_ct1);
-///       });
-///   }
-/// Then launch the kernel through wrapper like:
-///   typedef void(*fpt)(int *);
-///   fpt fp = kernel_func_wrapper;
-///   dpct::kernel_launcher::launch(fp, dpct::dim3(1), dpct::dim3(1), 0, 0,
-///   device_ptr);
-/// If the origin function type is erased, then need to register it first:
-///   void *fp = (void *)wrapper_register(&kernel_func_wrapper).get();
-///   dpct::kernel_launcher::launch(fp, dpct::dim3(1), dpct::dim3(1), args, 0,
-///   0);
-class kernel_launcher {
-  template <typename FuncT, typename ArgSelector, std::size_t... Index>
-  static void launch_helper(FuncT &&func, ArgSelector &selector,
-                            std::index_sequence<Index...>) {
-    func(selector.template get<Index>()...);
-  }
-  static void set_execution_config(dim3 group_range, dim3 local_range,
-                                   unsigned int local_mem_size, queue_ptr que) {
-    if (que) {
-      _que = que;
-    } else {
-      _que = &get_default_queue();
-    }
-    _nr = sycl::nd_range<3>(
-        static_cast<sycl::range<3>>(group_range * local_range),
-        static_cast<sycl::range<3>>(local_range));
-    _local_mem_size = local_mem_size;
-  };
-
-public:
-  /// Variables for storing execution configuration.
-  static inline thread_local sycl::queue *_que = nullptr;
-  static inline thread_local sycl::nd_range<3> _nr = sycl::nd_range<3>();
-  static inline thread_local unsigned int _local_mem_size = 0;
-  /// Map for retrieving launchable functor from a raw pointer.
-  static inline std::map<
-      const void *,
-      std::function<void(dim3, dim3, void **, unsigned int, queue_ptr)>>
-      kernel_function_ptr_map = {};
-
-  /// Registers a kernel function pointer with a corresponding launchable
-  /// functor.
-  /// \param [in] func Pointer to the kernel function.
-  /// \param [in] launcher Functor to handle kernel invocation.
-  static void register_kernel_ptr(
-      const void *func,
-      std::function<void(dim3, dim3, void **, unsigned int, queue_ptr)>
-          launcher) {
-    kernel_function_ptr_map[func] = std::move(launcher);
-  }
-  /// Launches a kernel function with arguments provided directly through
-  /// kernel function wrapper.
-  /// \tparam FuncT Type of the kernel function wrapper.
-  /// \tparam ArgsT Types of kernel arguments.
-  /// \param [in] func Pointer to the kernel function wrapper.
-  /// \param [in] group_range SYCL group range.
-  /// \param [in] local_range SYCL local range.
-  /// \param [in] local_mem_size The size of local memory required by the kernel
-  /// function.
-  /// \param [in] que SYCL queue used to execute kernel.
-  /// \param [in] args Kernel arguments.
-  template <typename FuncT, typename... ArgsT>
-  static std::enable_if_t<std::is_invocable_v<FuncT *, ArgsT...>, void>
-  launch(FuncT *func, dim3 group_range, dim3 local_range,
-         unsigned int local_mem_size, queue_ptr que, ArgsT... args) {
-    set_execution_config(group_range, local_range, local_mem_size, que);
-    func(args...);
-  }
-  /// Launches a kernel function through registered kernel function wrapper.
-  /// \param [in] func Pointer to the registered kernel function wrapper.
-  /// \param [in] group_range SYCL group range.
-  /// \param [in] local_range SYCL local range.
-  /// \param [in] args Array of pointers to kernel arguments.
-  /// \param [in] local_mem_size The size of local memory required by the kernel
-  /// function.
-  /// \param [in] que SYCL queue used to execute kernel.
-  static void launch(const void *func, dim3 group_range, dim3 local_range,
-                     void **args, unsigned int local_mem_size, queue_ptr que) {
-    kernel_function_ptr_map[func](group_range, local_range, args,
-                                  local_mem_size, que);
-  }
-  /// Launches a kernel function with packed arguments through kernel
-  /// function wrapper.
-  /// \tparam FuncT Type of the kernel function wrapper.
-  /// \param [in] func Pointer to the kernel function wrapper.
-  /// \param [in] group_range SYCL group range.
-  /// \param [in] local_range SYCL local range.
-  /// \param [in] args Array of pointers to kernel arguments.
-  /// \param [in] local_mem_size The size of local memory required by the kernel
-  /// function.
-  /// \param [in] que SYCL queue used to execute kernel.
-  template <typename FuncT>
-  static std::enable_if_t<std::is_function_v<FuncT>, void>
-  launch(FuncT *func, dim3 group_range, dim3 local_range, void **args,
-         unsigned int local_mem_size, queue_ptr que) {
-    constexpr size_t p_num = args_selector<0, 0, FuncT>::params_num;
-    set_execution_config(group_range, local_range, local_mem_size, que);
-    args_selector<p_num, p_num, FuncT> selector(args, nullptr);
-    launch_helper(func, selector, std::make_index_sequence<p_num>{});
-  }
-};
-
-/// Helper class to register and invoke kernel functions through a wrapper.
-template <typename F> class wrapper_register;
-template <typename Ret, typename... Args>
-class wrapper_register<Ret (*)(Args...)> {
-public:
-  typedef Ret (*FT)(Args...);
-  FT func;
-  /// Constructor to register a kernel function pointer.
-  /// \param [in] fp Pointer to the kernel function.
-  wrapper_register(FT fp) : func(fp) {
-    kernel_launcher::register_kernel_ptr((void *)func, *this);
-  }
-  /// Invokes the kernel function through the stored kernel function wrapper.
-  /// \param [in] group_range SYCL group range.
-  /// \param [in] local_range SYCL local range.
-  /// \param [in] args Array of pointers to kernel arguments.
-  /// \param [in] local_mem_size The size of local memory required by the kernel
-  /// function.
-  /// \param [in] que SYCL queue used to execute kernel.
-  void operator()(dim3 group_range, dim3 local_range, void **args,
-                  unsigned int local_mem_size, queue_ptr que) {
-    kernel_launcher::launch(func, group_range, local_range, args,
-                            local_mem_size, que);
-  }
-  /// Retrieves the original kernel function pointer.
-  /// \return The original kernel function pointer.
-  const FT &get() const noexcept { return func; }
-  /// Implicit conversion to the original kernel function pointer.
-  /// \return The original kernel function pointer.
-  operator FT() const noexcept { return func; }
-};
-/// Deduction guide for wrapper_register.
-template <typename Ret, typename... Args>
-wrapper_register(Ret (*)(Args...)) -> wrapper_register<Ret (*)(Args...)>;
 
 /// Find image wrapper in a kernel library and return its address.
 /// \param [in] library Handle to the kernel library.

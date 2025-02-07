@@ -21,192 +21,6 @@ namespace experimental {
 
 #ifdef SYCL_EXT_ONEAPI_BINDLESS_IMAGES
 
-/// The wrapper structure for external memory handle desc
-class external_mem_handle_desc {
-#ifdef _WIN32
-  void *handle;
-  const void *name;
-#else
-  int handle;
-#endif // _WIN32
-  sycl::ext::oneapi::experimental::external_mem_handle_type handle_type;
-  size_t size_in_bytes;
-  int flags;
-
-public:
-  external_mem_handle_desc() {
-#ifdef _WIN32
-    handle = nullptr;
-    name = nullptr;
-#else
-    handle = -1;
-#endif // _WIN32
-    handle_type =
-        sycl::ext::oneapi::experimental::external_mem_handle_type::opaque_fd;
-    size_in_bytes = 0;
-    flags = 0;
-  }
-
-#ifdef _WIN32
-  /// handle setter
-  /// \param [in] win32_handle The win32 NT handle of the external resource
-  void set_win32_handle(void *win32_handle) { handle = win32_handle; }
-
-  /// name setter
-  /// \param [in] win32_obj_name The object of the external resource
-  void set_win32_obj_name(const void *win32_obj_name) { name = win32_obj_name; }
-#else
-  /// fd setter
-  /// \param [in] fd The file descriptor of the external resource
-  void set_fd_handle(int fd) { handle = fd; }
-#endif // _WIN32
-
-  /// handle_type setter
-  /// \param [in] type The type of the external resource handle
-  void set_handle_type(
-      sycl::ext::oneapi::experimental::external_mem_handle_type type) {
-    handle_type = type;
-  }
-
-  /// size setter
-  /// \param [in] size The size (in bytes) of the external resource
-  void set_res_size(unsigned long long size) { size_in_bytes = size; }
-
-  /// flags setter
-  /// \param [in] flags The flags used to handle importing of external resource
-  void set_flags(int flags) { this->flags = flags; }
-
-#ifdef _WIN32
-  /// handle getter
-  /// \param [out] handle The win32 NT handle of the external resource
-  void *get_win32_handle() { return handle; }
-
-  /// name getter
-  /// \param [out] name The object of the external resource
-  const void *get_win32_obj_name() { return name; }
-#else
-  /// fd getter
-  /// \param [out] fd The file descriptor of the external resource
-  int get_fd_handle() { return handle; }
-#endif // _WIN32
-
-  /// handle_type getter
-  /// \param [out] handle_type The type of the external resource handle
-  sycl::ext::oneapi::experimental::external_mem_handle_type get_handle_type() {
-    return handle_type;
-  }
-
-  /// size getter
-  /// \param [out] size The size (in bytes) of the external resource
-  unsigned long long get_res_size() { return size_in_bytes; }
-
-  /// flags getter
-  /// \param [out] flags The flags used to handle importing of external resource
-  int get_flags() { return flags; }
-};
-
-/// The wrapper structure for external image memory desc
-class external_mem_img_desc {
-  sycl::range<3> size;
-  image_channel channel;
-  unsigned int num_levels;
-  sycl::ext::oneapi::experimental::image_type type;
-
-public:
-  external_mem_img_desc() {
-    size = sycl::range<3>{0, 0, 0};
-    channel = image_channel::create<float>();
-    num_levels = 1;
-    type = sycl::ext::oneapi::experimental::image_type::standard;
-  }
-
-  /// size setter
-  /// \param [in] img_dims The dimensions of the imported image resource
-  void set_size(sycl::range<3> img_dims) {
-    size = img_dims;
-
-    for (int i = 0; i < 3; i++) {
-      if (size[i] == 1) {
-        size[i] = 0;
-      }
-    }
-  }
-
-  /// image_channel setter
-  /// \param [in] img_ch The channel info of the imported image resource
-  void set_image_channel(image_channel img_ch) { channel = img_ch; }
-
-  /// num_levels setter
-  /// \param [in] numLevels The no. of levels in the imported image resource
-  void set_num_levels(unsigned int num_levels) {
-    this->num_levels = num_levels;
-
-    if (num_levels > 1) {
-      set_image_type(sycl::ext::oneapi::experimental::image_type::mipmap);
-    }
-  }
-
-  /// type setter
-  /// \param [in] img_type The type of the imported image resource
-  void set_image_type(sycl::ext::oneapi::experimental::image_type img_type) {
-    type = img_type;
-  }
-
-  /// size getter
-  /// \param [out] size The dimensions of the imported image resource
-  sycl::range<3> get_size() { return size; }
-
-  /// image_channel getter
-  /// \param [out] image_channel The channel info of the imported image resource
-  image_channel get_image_channel() { return channel; }
-
-  /// num_levels getter
-  /// \param [out] num_levels The no. of levels in the imported image resource
-  unsigned int get_num_levels() { return num_levels; }
-
-  /// type getter
-  /// \param [out] type The image type of the imported image resource
-  sycl::ext::oneapi::experimental::image_type get_image_type() { return type; }
-};
-
-/// The wrapper structure for external buffer memory desc
-class external_mem_buf_desc {
-  uint64_t size_in_bytes;
-  uint64_t offset;
-  unsigned int flags;
-
-public:
-  external_mem_buf_desc() {
-    size_in_bytes = 0;
-    offset = 0;
-    flags = 0;
-  }
-
-  /// size setter
-  /// \param [in] size The size (in bytes) of the external buffer resource
-  void set_res_size(uint64_t size) { size_in_bytes = size; }
-
-  /// offset setter
-  /// \param [in] offset The memory offset of the external buffer resource
-  void set_mem_offset(uint64_t offset) { this->offset = offset; }
-
-  /// flags setter
-  /// \param [in] flags The flags used to import external buffer resource
-  void set_flags(unsigned int flags) { this->flags = flags; }
-
-  /// size getter
-  /// \param [out] size_in_bytes The size (in bytes) of the external buffer res
-  uint64_t get_res_size() { return size_in_bytes; }
-
-  /// offset getter
-  /// \param [out] offset The memory offset of the external buffer resource
-  uint64_t get_mem_offset() { return offset; }
-
-  /// flags getter
-  /// \param [out] flags The flags used to import external buffer resource
-  unsigned int get_flags() { return flags; }
-};
-
 /// The wrapper class of bindless image memory handle.
 class image_mem_wrapper {
 public:
@@ -266,24 +80,6 @@ public:
     auto q = get_default_queue();
     init_mip_level_wrappers(q);
   }
-  /// Create bindless image memory wrapper.
-  /// \param [in] extMem SYCL external memory object.
-  /// \param [in] ext_img_mem_desc The img desc of the imported image resource.
-  image_mem_wrapper(sycl::ext::oneapi::experimental::external_mem extMem,
-                    external_mem_img_desc *ext_img_mem_desc) {
-    auto q = get_default_queue();
-    unsigned int array_size = 1;
-
-    _channel = ext_img_mem_desc->get_image_channel();
-    _desc = sycl::ext::oneapi::experimental::image_descriptor(
-        ext_img_mem_desc->get_size(), _channel.get_channel_num(),
-        _channel.get_channel_type(), ext_img_mem_desc->get_image_type(),
-        ext_img_mem_desc->get_num_levels(), array_size);
-    _handle = sycl::ext::oneapi::experimental::map_external_image_memory(
-        extMem, _desc, q);
-
-    init_mip_level_wrappers(q);
-  }
   image_mem_wrapper(const image_mem_wrapper &) = delete;
   image_mem_wrapper &operator=(const image_mem_wrapper &) = delete;
   /// Destroy bindless image memory wrapper.
@@ -317,11 +113,6 @@ public:
   /// Get the image mip level of the bindless image memory.
   /// \returns The image mip level of the bindless image memory.
   image_mem_wrapper *get_mip_level(unsigned int level) {
-    if (_desc.type == sycl::ext::oneapi::experimental::image_type::standard) {
-      assert(level == 0);
-      return this;
-    }
-
     assert(_desc.type == sycl::ext::oneapi::experimental::image_type::mipmap);
     return _sub_wrappers + level;
   }
@@ -737,7 +528,9 @@ private:
 
 namespace detail {
 struct sampled_image_handle_compare {
-  template <class T> bool operator()(T L, T R) const {
+  bool
+  operator()(sycl::ext::oneapi::experimental::sampled_image_handle L,
+             sycl::ext::oneapi::experimental::sampled_image_handle R) const {
     return L.raw_handle < R.raw_handle;
   }
 };
@@ -751,14 +544,6 @@ inline std::pair<image_data, sampling_info> &get_img_info_map(
   return img_info_map[handle];
 }
 
-inline std::pair<image_data, sampling_info> &get_img_info_map(
-    const sycl::ext::oneapi::experimental::unsampled_image_handle handle) {
-  static std::map<sycl::ext::oneapi::experimental::unsampled_image_handle,
-                  std::pair<image_data, sampling_info>,
-                  sampled_image_handle_compare>
-      img_info_map;
-  return img_info_map[handle];
-}
 inline image_mem_wrapper *&get_img_mem_map(
     const sycl::ext::oneapi::experimental::sampled_image_handle handle) {
   static std::map<sycl::ext::oneapi::experimental::sampled_image_handle,
@@ -767,13 +552,6 @@ inline image_mem_wrapper *&get_img_mem_map(
   return img_mem_map[handle];
 }
 
-inline image_mem_wrapper *&get_img_mem_map(
-    const sycl::ext::oneapi::experimental::unsampled_image_handle handle) {
-  static std::map<sycl::ext::oneapi::experimental::unsampled_image_handle,
-                  image_mem_wrapper *, sampled_image_handle_compare>
-      img_mem_map;
-  return img_mem_map[handle];
-}
 static inline size_t
 get_ele_size(const sycl::ext::oneapi::experimental::image_descriptor &decs) {
   size_t channel_size;
@@ -837,16 +615,14 @@ static inline std::vector<sycl::event> dpct_memcpy_to_host(
     w_offset_src = 0;
     ++h_offset_src;
   }
-  if (s - offset_dest > 0) {
-    const auto src_offset =
-        sycl::range<3>(w_offset_src / ele_size, h_offset_src, 0);
-    const auto dest_offset = sycl::range<3>(offset_dest / ele_size, 0, 0);
-    const auto dest_extend = sycl::range<3>(0, 0, 0);
-    const auto copy_extend = sycl::range<3>((s - offset_dest) / ele_size, 1, 0);
-    event_list.push_back(q.ext_oneapi_copy(src, src_offset, desc_src,
-                                           dest_host_ptr, dest_offset,
-                                           dest_extend, copy_extend));
-  }
+  const auto src_offset =
+      sycl::range<3>(w_offset_src / ele_size, h_offset_src, 0);
+  const auto dest_offset = sycl::range<3>(offset_dest / ele_size, 0, 0);
+  const auto dest_extend = sycl::range<3>(0, 0, 0);
+  const auto copy_extend = sycl::range<3>((s - offset_dest) / ele_size, 1, 0);
+  event_list.push_back(q.ext_oneapi_copy(src, src_offset, desc_src,
+                                         dest_host_ptr, dest_offset,
+                                         dest_extend, copy_extend));
   return event_list;
 }
 
@@ -911,17 +687,15 @@ static inline std::vector<sycl::event> dpct_memcpy_from_host(
     w_offset_dest = 0;
     ++h_offset_dest;
   }
-  if (s - offset_src > 0) {
-    const auto src_offset = sycl::range<3>(offset_src / ele_size, 0, 0);
-    const auto src_extend = sycl::range<3>(0, 0, 0);
-    const auto dest_offset =
-        sycl::range<3>(w_offset_dest / ele_size, h_offset_dest, 0);
-    const auto copy_extend = sycl::range<3>((s - offset_src) / ele_size, 1, 0);
-    // TODO: Remove const_cast after refining the signature of ext_oneapi_copy.
-    event_list.push_back(q.ext_oneapi_copy(
-        const_cast<void *>(src_host_ptr), src_offset, src_extend, dest,
-        dest_offset, desc_dest, copy_extend));
-  }
+  const auto src_offset = sycl::range<3>(offset_src / ele_size, 0, 0);
+  const auto src_extend = sycl::range<3>(0, 0, 0);
+  const auto dest_offset =
+      sycl::range<3>(w_offset_dest / ele_size, h_offset_dest, 0);
+  const auto copy_extend = sycl::range<3>((s - offset_src) / ele_size, 1, 0);
+  // TODO: Remove const_cast after refining the signature of ext_oneapi_copy.
+  event_list.push_back(q.ext_oneapi_copy(const_cast<void *>(src_host_ptr),
+                                         src_offset, src_extend, dest,
+                                         dest_offset, desc_dest, copy_extend));
   return event_list;
 }
 
@@ -1054,57 +828,15 @@ inline void map_resources(int count, external_mem_wrapper **handles,
 /// \param [in] q The queue used to unmap the resource with.
 inline void unmap_resources(int count, external_mem_wrapper **handles,
                             queue_ptr q_ptr = &get_default_queue()) {
-  if (detail::check_duplicate_entries(count, handles)) {
-    throw std::runtime_error(
-        "Duplicate handle entries found during resource unmapping!");
-  }
+  if (detail::check_duplicate_entries(count, handles) &&
+      "Duplicate handle entries found during resource unmapping!")
+    ;
 
   for (int i = 0; i < count; i++) {
     handles[i]->unmap_resource(*q_ptr);
   }
 }
 #endif // _WIN32
-
-/// Imports external memory into a SYCL external memory object.
-/// \param [in] extMem SYCL external memory object ptr to be initialized.
-/// \param [in] memHandleDesc Pointer to the external memory handle descriptor.
-/// \throws std::runtime_error If no valid external memory handle is provided.
-inline void
-import_external_memory(sycl::ext::oneapi::experimental::external_mem *extMem,
-                       external_mem_handle_desc *memHandleDesc) {
-#ifdef _WIN32
-  if (memHandleDesc->get_win32_handle()) {
-    *extMem = sycl::ext::oneapi::experimental::import_external_memory(
-        sycl::ext::oneapi::experimental::external_mem_descriptor<
-            sycl::ext::oneapi::experimental::resource_win32_handle>{
-            {memHandleDesc->get_win32_handle()},
-            memHandleDesc->get_handle_type(),
-            memHandleDesc->get_res_size()},
-        get_default_queue());
-  } else if (memHandleDesc->get_win32_obj_name()) {
-    *extMem = sycl::ext::oneapi::experimental::import_external_memory(
-        sycl::ext::oneapi::experimental::external_mem_descriptor<
-            sycl::ext::oneapi::experimental::resource_win32_name>{
-            {memHandleDesc->get_win32_obj_name()},
-            memHandleDesc->get_handle_type(),
-            memHandleDesc->get_res_size()},
-        get_default_queue());
-  }
-#else
-  if (memHandleDesc->get_fd_handle() != -1) {
-    *extMem = sycl::ext::oneapi::experimental::import_external_memory(
-        sycl::ext::oneapi::experimental::external_mem_descriptor<
-            sycl::ext::oneapi::experimental::resource_fd>{
-            {memHandleDesc->get_fd_handle()},
-            memHandleDesc->get_handle_type(),
-            memHandleDesc->get_res_size()},
-        get_default_queue());
-  }
-#endif // _WIN32
-  else {
-    throw std::runtime_error("No external memory handle is set for importing!");
-  }
-}
 
 /// Create bindless image according to image data and sampling info.
 /// \param [in] data The image data used to create bindless image.
@@ -1178,69 +910,12 @@ create_bindless_image(image_data data, sampling_info info,
   return sycl::ext::oneapi::experimental::sampled_image_handle();
 }
 
-/// Create bindless image according to image data.
-/// \param [in] data The image data used to create bindless image.
-/// \param [in] q The queue where the image creation be executed.
-/// \returns The sampled image handle of created bindless image.
-static inline sycl::ext::oneapi::experimental::unsampled_image_handle
-create_bindless_image(image_data data, sycl::queue q = get_default_queue()) {
-  switch (data.get_data_type()) {
-  case image_data_type::linear: {
-    // TODO: Use pointer to create image when bindless image support.
-    auto mem = new image_mem_wrapper(
-        data.get_channel(), data.get_x() / data.get_channel().get_total_size());
-    auto img = sycl::ext::oneapi::experimental::create_image(
-        mem->get_handle(), mem->get_desc(), q);
-    detail::get_img_mem_map(img) = mem;
-    auto ptr = data.get_data_ptr();
-#ifdef DPCT_USM_LEVEL_NONE
-    q.ext_oneapi_copy(get_buffer(ptr).get_host_access().get_pointer(),
-                      mem->get_handle(), mem->get_desc())
-        .wait();
-#else
-    q.ext_oneapi_copy(ptr, mem->get_handle(), mem->get_desc()).wait();
-#endif
-    return img;
-  }
-  case image_data_type::pitch: {
-    auto mem =
-        new image_mem_wrapper(data.get_channel(), data.get_x(), data.get_y());
-    auto img = sycl::ext::oneapi::experimental::create_image(
-        mem->get_handle(), mem->get_desc(), q);
-    detail::get_img_mem_map(img) = mem;
-#ifdef DPCT_USM_LEVEL_NONE
-    q.ext_oneapi_copy(
-         get_buffer(data.get_data_ptr()).get_host_access().get_pointer(),
-         mem->get_handle(), mem->get_desc())
-        .wait();
-#else
-    q.ext_oneapi_copy(data.get_data_ptr(), mem->get_handle(), mem->get_desc())
-        .wait();
-
-#endif
-    return img;
-  }
-  case image_data_type::matrix: {
-    const auto mem = static_cast<image_mem_wrapper *>(data.get_data_ptr());
-    auto img = sycl::ext::oneapi::experimental::create_image(
-        mem->get_handle(), mem->get_desc(), q);
-    return img;
-  }
-  default:
-    throw std::runtime_error(
-        "Unsupported image_data_type in create_bindless_image!");
-    break;
-  }
-  // Must not reach here.
-  return sycl::ext::oneapi::experimental::unsampled_image_handle();
-}
-
 /// Destroy bindless image.
 /// \param [in] handle The bindless image should be destroyed.
 /// \param [in] q The queue where the image destruction be executed.
-template <class T>
-static inline void destroy_bindless_image(T handle,
-                                          sycl::queue q = get_default_queue()) {
+static inline void destroy_bindless_image(
+    sycl::ext::oneapi::experimental::sampled_image_handle handle,
+    sycl::queue q = get_default_queue()) {
   auto &mem = detail::get_img_mem_map(handle);
   if (mem) {
     delete mem;
@@ -1252,7 +927,8 @@ static inline void destroy_bindless_image(T handle,
 /// Get the image data according to sampled image handle.
 /// \param [in] handle The bindless image handle.
 /// \returns The image data of sampled image.
-template <class T> static inline image_data get_data(const T handle) {
+static inline image_data
+get_data(const sycl::ext::oneapi::experimental::sampled_image_handle handle) {
   return detail::get_img_info_map(handle).first;
 }
 
@@ -1674,20 +1350,6 @@ static inline void dpct_memcpy(image_mem_wrapper *dest, size_t w_offset_dest,
   dpct_memcpy(temp, src, w_offset_src, h_offset_src, s, q);
   dpct_memcpy(dest, w_offset_dest, h_offset_dest, temp, s, q);
   sycl::free(temp, q);
-}
-// A wrapper for sycl fetch_image function for the byte addressing image.
-template <typename DataT, typename HintT = DataT, typename CoordT>
-DataT fetch_image_by_byte(
-    const sycl::ext::oneapi::experimental::unsampled_image_handle &imageHandle,
-    CoordT &&coords) {
-  if constexpr (std::is_scalar_v<CoordT>) {
-    return sycl::ext::oneapi::experimental::fetch_image<DataT, HintT, CoordT>(
-        imageHandle, coords / sizeof(DataT));
-  } else {
-    coords[0] = coords[0] / sizeof(DataT);
-    return sycl::ext::oneapi::experimental::fetch_image<DataT, HintT, CoordT>(
-        imageHandle, coords);
-  }
 }
 
 using image_mem_wrapper_ptr = image_mem_wrapper *;
