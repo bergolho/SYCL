@@ -1,0 +1,463 @@
+---
+MainSourceFile:  '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/MainSrcFiles_placehold'
+Replacements:
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          339
+    Length:          18
+    ReplacementText: "#include <sycl/sycl.hpp>\n#include <dpct/dpct.hpp>\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          377
+    Length:          26
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          694
+    Length:          26
+    ReplacementText: 'static dpct::constant_memory<size_t, 0> pitch;'
+    ConstantFlag:    DeviceConstant
+    ConstantOffset:  694
+    InitStr:         ''
+    NewHostVarName:  pitch_host_ct1
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          738
+    Length:          0
+    ReplacementText: "/*\nDPCT1110:0: The total declared local variable size in device function RHS_gpu exceeds 128 bytes and may cause high register pressure. Consult with your hardware vendor to find the total register size available and adjust the code, or use smaller sub-group size to avoid high register pressure.\n*/\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          745
+    Length:          11
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          885
+    Length:          0
+    ReplacementText: ",\n                     size_t pitch"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          1999
+    Length:          11
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          2052
+    Length:          0
+    ReplacementText: ", const sycl::nd_item<3> &item_ct1,\n                                size_t pitch"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          2075
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          2088
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          2101
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          3395
+    Length:          11
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          3515
+    Length:          0
+    ReplacementText: ",\n                      const sycl::nd_item<3> &item_ct1, size_t pitch"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          3538
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          3551
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          3564
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          3802
+    Length:          0
+    ReplacementText: ', pitch'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          4367
+    Length:          12
+    ReplacementText: 'dpct::dpct_memcpy'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          4418
+    Length:          22
+    ReplacementText: 'dpct::device_to_host'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          4918
+    Length:          12
+    ReplacementText: 'dpct::dpct_memcpy'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          4969
+    Length:          22
+    ReplacementText: 'dpct::device_to_host'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          5238
+    Length:          0
+    ReplacementText: "\n    dpct::device_ext &dev_ct1 = dpct::get_current_device();\n    sycl::queue &q_ct1 = dev_ct1.in_order_queue();"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          6653
+    Length:          52
+    ReplacementText: 'd_sv = (double *)dpct::dpct_malloc(pitch_h, width, NEQ)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          6734
+    Length:          18
+    ReplacementText: q_ct1.memcpy
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          6753
+    Length:          5
+    ReplacementText: 'pitch.get_ptr()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          6785
+    Length:          0
+    ReplacementText: '.wait()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          6925
+    Length:          60
+    ReplacementText: 'd_extra_params = (double *)sycl::malloc_device(extra_parameters_size, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          6991
+    Length:          10
+    ReplacementText: q_ct1.memcpy
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          7057
+    Length:          24
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          7082
+    Length:          0
+    ReplacementText: '.wait()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          7114
+    Length:          54
+    ReplacementText: "{\n      pitch.init();\n\n      dpct::get_device(dpct::get_device_id(q_ct1.get_device())).has_capability_or_fail({sycl::aspect::fp64});\n\n      q_ct1.submit(\n        [&](sycl::handler &cgh) {\n          auto pitch_ptr_ct1 = pitch.get_ptr();\n\n          cgh.parallel_for(\n            sycl::nd_range<3>(sycl::range<3>(1, 1, GRID) * sycl::range<3>(1, 1, BLOCK_SIZE), sycl::range<3>(1, 1, BLOCK_SIZE)), \n            [=](sycl::nd_item<3> item_ct1) {\n              SetInitialConditionsKernel(d_sv, item_ct1, *pitch_ptr_ct1);\n            });\n        });\n    }"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          7168
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          7174
+    Length:          23
+    ReplacementText: 'dev_ct1.queues_wait_and_throw()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          8161
+    Length:          64
+    ReplacementText: 'stims_currents_device = (double *)sycl::malloc_device(stim_currents_size, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          8235
+    Length:          10
+    ReplacementText: q_ct1.memcpy
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          8301
+    Length:          24
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          8326
+    Length:          0
+    ReplacementText: '.wait()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          8345
+    Length:          100
+    ReplacementText: "{\n          pitch.init();\n\n          dpct::get_device(dpct::get_device_id(q_ct1.get_device())).has_capability_or_fail({sycl::aspect::fp64});\n\n          q_ct1.submit(\n            [&](sycl::handler &cgh) {\n              auto pitch_ptr_ct1 = pitch.get_ptr();\n\n              cgh.parallel_for(\n                sycl::nd_range<3>(sycl::range<3>(1, 1, GRID) * sycl::range<3>(1, 1, BLOCK_SIZE), sycl::range<3>(1, 1, BLOCK_SIZE)), \n                [=](sycl::nd_item<3> item_ct1) {\n                  SolveOdesKernel(dt_ode, d_sv, stims_currents_device, d_extra_params, fibrosis, item_ct1, *pitch_ptr_ct1);\n                });\n            });\n        }"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          8445
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          8448
+    Length:          31
+    ReplacementText: "        /*\n        DPCT1026:1: The call to cudaPeekAtLastError was removed because this functionality is redundant in SYCL.\n        */\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          8487
+    Length:          31
+    ReplacementText: 'dpct::dpct_free(stims_currents_device, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          8596
+    Length:          14
+    ReplacementText: 'dpct::dpct_free(d_sv, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Offset:          8616
+    Length:          24
+    ReplacementText: 'dpct::dpct_free(d_extra_params, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+MainSourceFilesDigest:
+  - MainSourceFile:  '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/main.cu'
+    Digest:          f7df9a2e1369ef8a95e5da3f258d5974
+DpctVersion:     2025.0.0
+MainHelperFileName: ''
+USMLevel:        ''
+FeatureMap:      {}
+CompileTargets:  {}
+OptionMap:
+  AnalysisScopePath:
+    Value:           '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone'
+    Specified:       false
+  AsyncHandler:
+    Value:           'false'
+    Specified:       false
+  BuildScript:
+    Value:           '0'
+    Specified:       false
+  CodePinEnabled:
+    Value:           'false'
+    Specified:       false
+  CommentsEnabled:
+    Value:           'false'
+    Specified:       false
+  CompilationsDir:
+    Value:           ''
+    Specified:       false
+  CtadEnabled:
+    Value:           'false'
+    Specified:       false
+  EnablepProfiling:
+    Value:           'false'
+    Specified:       false
+  ExperimentalFlag:
+    Value:           '0'
+    Specified:       false
+  ExplicitNamespace:
+    Value:           '20'
+    Specified:       false
+  ExtensionDDFlag:
+    Value:           '0'
+    Specified:       false
+  ExtensionDEFlag:
+    Value:           '4294967295'
+    Specified:       false
+  HelperFuncPreferenceFlag:
+    Value:           '0'
+    Specified:       false
+  NDRangeDim:
+    Value:           '3'
+    Specified:       false
+  NoDRYPattern:
+    Value:           'false'
+    Specified:       false
+  OptimizeMigration:
+    Value:           'false'
+    Specified:       false
+  ProcessAll:
+    Value:           'false'
+    Specified:       false
+  RuleFile:
+    Value:           ''
+    Specified:       false
+  SyclNamedLambda:
+    Value:           'false'
+    Specified:       false
+  UseSYCLCompat:
+    Value:           'false'
+    Specified:       false
+  UsmLevel:
+    Value:           '1'
+    Specified:       false
+...

@@ -1,0 +1,652 @@
+---
+MainSourceFile:  '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/sycl_code/ten_tusscher_3_RS_common.inc'
+Replacements:
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          0
+    Length:          0
+    ReplacementText: "#include <sycl/sycl.hpp>\n#include <dpct/dpct.hpp>\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          2150
+    Length:          21
+    ReplacementText: 'dpct::pow((atpi/katp), hatp)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          2265
+    Length:          18
+    ReplacementText: 'dpct::pow((Ko/5.4), natp)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          2380
+    Length:          23
+    ReplacementText: 'dpct::pow((katp2/atpi), hatp2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          3825
+    Length:          12
+    ReplacementText: 'sycl::log((Ko/Ki))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          3868
+    Length:          14
+    ReplacementText: 'sycl::log((Nao/Nai))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          3913
+    Length:          32
+    ReplacementText: 'sycl::log((Ko+pKNa*Nao)/(Ki+pKNa*Nai))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          3980
+    Length:          14
+    ReplacementText: 'sycl::log((Cao/Cai))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          5066
+    Length:          24
+    ReplacementText: 'sycl::exp(0.06*(svolt-Ek-200))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          5105
+    Length:          26
+    ReplacementText: 'sycl::exp(0.0002*(svolt-Ek+100))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          5142
+    Length:          22
+    ReplacementText: 'sycl::exp(0.1*(svolt-Ek-10))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          5170
+    Length:          20
+    ReplacementText: 'sycl::exp(-0.5*(svolt-Ek))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          5248
+    Length:          23
+    ReplacementText: 'sycl::exp(-0.1*svolt*F/(R*T))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          5279
+    Length:          19
+    ReplacementText: 'sycl::exp(-svolt*F/(R*T))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          5321
+    Length:          20
+    ReplacementText: 'sycl::exp((25-svolt)/5.98)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          5543
+    Length:          12
+    ReplacementText: 'sycl::sqrt(Ko/5.4)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          5738
+    Length:          24
+    ReplacementText: 'sycl::exp((n-1)*svolt*F/(R*T))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          5777
+    Length:          20
+    ReplacementText: 'sycl::exp(n*svolt*F/(R*T))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          5826
+    Length:          24
+    ReplacementText: 'sycl::exp((n-1)*svolt*F/(R*T))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          6566
+    Length:          20
+    ReplacementText: 'sycl::exp((-60.-svolt)/5.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          6604
+    Length:          19
+    ReplacementText: 'sycl::exp((svolt+35.)/5.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          6634
+    Length:          21
+    ReplacementText: 'sycl::exp((svolt-50.)/200.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          6693
+    Length:          24
+    ReplacementText: 'sycl::exp((-56.86-svolt)/9.03)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          6723
+    Length:          24
+    ReplacementText: 'sycl::exp((-56.86-svolt)/9.03)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          6824
+    Length:          24
+    ReplacementText: 'sycl::exp(-(svolt+10.66)/11.1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          6926
+    Length:          21
+    ReplacementText: 'sycl::exp(-(svolt+80.)/6.8)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          6968
+    Length:          16
+    ReplacementText: 'sycl::exp(0.079*svolt)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          6993
+    Length:          17
+    ReplacementText: 'sycl::exp(0.3485*svolt)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7068
+    Length:          23
+    ReplacementText: 'sycl::exp((svolt+71.55)/7.43)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7097
+    Length:          23
+    ReplacementText: 'sycl::exp((svolt+71.55)/7.43)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7185
+    Length:          18
+    ReplacementText: 'sycl::exp((0.057)*svolt)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7208
+    Length:          21
+    ReplacementText: 'sycl::exp(-0.1*(svolt+32.))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7313
+    Length:          17
+    ReplacementText: 'sycl::exp(0.2444*svolt)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7388
+    Length:          19
+    ReplacementText: 'sycl::exp(-0.04391*svolt)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7442
+    Length:          24
+    ReplacementText: 'sycl::exp(0.311*(svolt+79.23))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7492
+    Length:          19
+    ReplacementText: 'sycl::exp(-0.01052*svolt)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7516
+    Length:          26
+    ReplacementText: 'sycl::exp(-0.1378*(svolt+40.14))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7621
+    Length:          20
+    ReplacementText: 'sycl::exp((-26.-svolt)/7.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7662
+    Length:          21
+    ReplacementText: 'sycl::exp((-45.-svolt)/10.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7702
+    Length:          24
+    ReplacementText: 'sycl::exp((svolt-(-30.))/11.5)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7775
+    Length:          23
+    ReplacementText: 'sycl::exp((svolt-(-88.))/24.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7821
+    Length:          20
+    ReplacementText: 'sycl::exp((-5.-svolt)/14.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7860
+    Length:          26
+    ReplacementText: 'sycl::sqrt(1.+sycl::exp((5.-svolt)/6))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          7906
+    Length:          20
+    ReplacementText: 'sycl::exp((svolt-35.)/15.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8166
+    Length:          18
+    ReplacementText: 'sycl::exp((20-svolt)/6.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8204
+    Length:          18
+    ReplacementText: 'sycl::exp((svolt+28)/5.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8241
+    Length:          33
+    ReplacementText: 'sycl::exp(-(svolt+67)*(svolt+67)/1000.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8490
+    Length:          19
+    ReplacementText: 'sycl::exp((-8-svolt)/7.5)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8529
+    Length:          17
+    ReplacementText: 'sycl::exp((svolt+20)/7)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8563
+    Length:          31
+    ReplacementText: 'sycl::exp(-(svolt+27)*(svolt+27)/225)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8611
+    Length:          19
+    ReplacementText: 'sycl::exp((13-svolt)/10.)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8649
+    Length:          18
+    ReplacementText: 'sycl::exp((svolt+30)/10)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8714
+    Length:          17
+    ReplacementText: 'sycl::exp((svolt+35)/7)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8751
+    Length:          31
+    ReplacementText: 'sycl::exp(-(svolt+27)*(svolt+27)/170)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8801
+    Length:          18
+    ReplacementText: 'sycl::exp((25-svolt)/10)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8837
+    Length:          18
+    ReplacementText: 'sycl::exp((svolt+30)/10)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          8977
+    Length:          14
+    ReplacementText: 'sycl::exp(-dt/TAU_M)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          9024
+    Length:          14
+    ReplacementText: 'sycl::exp(-dt/TAU_H)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          9071
+    Length:          14
+    ReplacementText: 'sycl::exp(-dt/TAU_J)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          9124
+    Length:          16
+    ReplacementText: 'sycl::exp(-dt/TAU_Xr1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          9176
+    Length:          15
+    ReplacementText: 'sycl::exp(-dt/TAU_Xs)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          9223
+    Length:          14
+    ReplacementText: 'sycl::exp(-dt/TAU_S)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          9269
+    Length:          14
+    ReplacementText: 'sycl::exp(-dt/TAU_F)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Offset:          9318
+    Length:          15
+    ReplacementText: 'sycl::exp(-dt/TAU_F2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+MainSourceFilesDigest:
+  - MainSourceFile:  '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone/ten_tusscher_3_RS_common.inc'
+    Digest:          0180e90f8ddd9e744de2ea222536a724
+DpctVersion:     2025.0.0
+MainHelperFileName: ''
+USMLevel:        ''
+FeatureMap:      {}
+CompileTargets:  {}
+OptionMap:
+  AnalysisScopePath:
+    Value:           '/home/lucas/Github/SYCL/Migration_CUDA_to_SYCL/TenTusscher/cuda/convert_zone'
+    Specified:       false
+  AsyncHandler:
+    Value:           'false'
+    Specified:       false
+  BuildScript:
+    Value:           '0'
+    Specified:       false
+  CodePinEnabled:
+    Value:           'false'
+    Specified:       false
+  CommentsEnabled:
+    Value:           'false'
+    Specified:       false
+  CompilationsDir:
+    Value:           ''
+    Specified:       false
+  CtadEnabled:
+    Value:           'false'
+    Specified:       false
+  EnablepProfiling:
+    Value:           'false'
+    Specified:       false
+  ExperimentalFlag:
+    Value:           '0'
+    Specified:       false
+  ExplicitNamespace:
+    Value:           '20'
+    Specified:       false
+  ExtensionDDFlag:
+    Value:           '0'
+    Specified:       false
+  ExtensionDEFlag:
+    Value:           '4294967295'
+    Specified:       false
+  HelperFuncPreferenceFlag:
+    Value:           '0'
+    Specified:       false
+  NDRangeDim:
+    Value:           '3'
+    Specified:       false
+  NoDRYPattern:
+    Value:           'false'
+    Specified:       false
+  OptimizeMigration:
+    Value:           'false'
+    Specified:       false
+  ProcessAll:
+    Value:           'false'
+    Specified:       false
+  RuleFile:
+    Value:           ''
+    Specified:       false
+  SyclNamedLambda:
+    Value:           'false'
+    Specified:       false
+  UseSYCLCompat:
+    Value:           'false'
+    Specified:       false
+  UsmLevel:
+    Value:           '1'
+    Specified:       false
+...
